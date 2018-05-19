@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>html5复习巩固-video标签</title>
+    <style type="text/css">
+        .video {
+            margin: 0 auto;
+            width: 1000px;
+            text-align: center;
+        }
+        button {
+            cursor: pointer;
+            padding: 10px;
+            background: #a8ffa8;
+            border: 0;
+            border-radius: 5px 5px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+            outline: none;
+        }
+        button:hover {
+            background: #ccffcc;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <h1>h5中的新特性</h1>
+    <ul>
+        <li>canvas</li>
+        <li>svg</li>
+        <li>video & audio</li>
+        <li>存储 localstorage sessionstorage</li>
+        <li>内容元素(nav section footer header等等)</li>
+        <li>表单元素(search.etc)</li>
+    </ul>
+
+    <div class="video">
+        <div class="controls">
+            <button onclick="playOrPause()" >播放/暂停</button>
+            <button onclick="bigger(event)" data-index='big'>大</button>
+            <button onclick="medium()" data-index='medium'>中</button>
+            <button onclick="smaller()" data-index='small'>小</button>
+            <button onclick="loopVideoOrNot()" data-index='small'>开启/关闭循环</button>
+        </div>
+        <video src='mov.ogg' width='320' height='240' id='video_src' controls="controls"></video>
+    </div>
+    <script type="text/javascript">
+        var video = document.getElementById('video_src');
+        var videoSize = {
+            big   : false,
+            medium: true,
+            small : false,
+        };
+        function playOrPause(){
+            if(video.paused){
+                video.play();
+            }else{
+                video.pause();
+            }
+        }
+        function bigger(event) {
+            // body...
+            var size = event.target.getAttribute('data-index');
+
+            if(video.width < 640){
+                video.width = 640;
+                changeKey(size);
+            }
+        }
+        function smaller() {
+            // body...
+            var size = event.target.getAttribute('data-index');
+            if(video.width > 160){
+                video.width = 160;
+                changeKey(size);
+            }
+        }
+        function medium(){
+            var size = event.target.getAttribute('data-index');
+            if(video.width != 320){
+                video.width = 320;
+                changeKey(size);
+            }
+        }
+        function changeKey(key) {
+            // body...
+            var k;
+            for(k in videoSize) {
+                if(k == key) {
+                    videoSize[k] = true;
+                }else {
+                    videoSize[k] = false;
+                }
+            }
+            return videoSize;
+        }
+        function loopVideoOrNot() {
+            // body...
+            // console.log(video.loop);
+            if(!!video.loop) {
+                video.loop = null;
+            }else {
+                video.loop = 'loop';
+            }
+            return video.loop;
+        }
+    </script>
+</body>
+</html>
